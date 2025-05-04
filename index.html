@@ -184,6 +184,11 @@
                 <td id="fish-sauce-amount">100 ml</td>
                 <td></td>
             </tr>
+            <tr>
+                <td>Salt (for brining)</td>
+                <td id="salt-amount">40-50 g</td>
+                <td>2-2.5% of cabbage weight</td>
+            </tr>
         </tbody>
     </table>
     
@@ -214,7 +219,8 @@
                 pepperFlakes: { baseMin: 90, baseMax: 180, scaledMin: 160, scaledMax: 300, unit: 'g' },
                 sugar: { base: 36, scaled: 63, unit: 'g' },
                 riceFlour: { base: 20, scaled: 35, unit: 'g' },
-                fishSauce: { base: 100, scaled: 175, unit: 'ml' }
+                fishSauce: { base: 100, scaled: 175, unit: 'ml' },
+                salt: { baseMin: 40, baseMax: 50, saltPercentMin: 2, saltPercentMax: 2.5, unit: 'g' }
             };
 
             const calculateBtn = document.getElementById('calculate-btn');
@@ -298,6 +304,11 @@
                 
                 // Fish sauce
                 document.getElementById('fish-sauce-amount').textContent = `${Math.round(ingredientRatios.fishSauce.base * ratio)} ml`;
+                
+                // Salt (2-2.5% of cabbage weight)
+                const saltMin = Math.round(cabbageWeight * ingredientRatios.salt.saltPercentMin / 100);
+                const saltMax = Math.round(cabbageWeight * ingredientRatios.salt.saltPercentMax / 100);
+                document.getElementById('salt-amount').textContent = `${saltMin}-${saltMax} g`;
                 
                 // Highlight the table to show it's been updated
                 const table = document.getElementById('ingredients-table');
