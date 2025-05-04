@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimchi Ingredients Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .input-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+            min-width: 180px;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 150px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .highlight {
+            background-color: #fff9c4;
+        }
+        .info-text {
+            text-align: center;
+            margin: 20px 0;
+            font-style: italic;
+            color: #666;
+        }
+        .recipe-notes {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        .recipe-notes h2 {
+            color: #d32f2f;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kimchi Ingredients Calculator</h1>
+    
+    <div class="input-section">
+        <div class="input-group">
+            <label for="cabbage-weight">Chinese Cabbage Weight (g):</label>
+            <input type="number" id="cabbage-weight" min="0" value="2000">
+        </div>
+        
+        <div class="button-group">
+            <button id="calculate-btn">Calculate Ingredients</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+    </div>
+    
+    <p class="info-text">Based on traditional Korean kimchi proportions</p>
+    
+    <table id="ingredients-table">
+        <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Amount</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Chinese cabbage</td>
+                <td id="cabbage-amount">2000 g</td>
+                <td>1 head (approximately)</td>
+            </tr>
+            <tr>
+                <td>Onion</td>
+                <td id="onion-amount">1 piece</td>
+                <td>Use 2 small/medium onions if needed</td>
+            </tr>
+            <tr>
+                <td>Carrot</td>
+                <td id="carrot-amount">200 g</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Green onion</td>
+                <td id="green-onion-amount">80 g</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Daikon radish</td>
+                <td id="daikon-amount">200 g</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Garlic</td>
+                <td id="garlic-amount">2 heads</td>
+                <td id="garlic-notes">Approximately 20-25 cloves</td>
+            </tr>
+            <tr>
+                <td>Ginger</td>
+                <td id="ginger-amount">20-30 g</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Korean red pepper flakes (Gochugaru)</td>
+                <td id="pepper-amount">1-2 cups (approx. 90-180 g)</td>
+                <td>Adjust to taste for spiciness</td>
+            </tr>
+            <tr>
+                <td>Sugar</td>
+                <td id="sugar-amount">3 tbsp (~36 g)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Rice flour</td>
+                <td id="rice-flour-amount">2 tbsp (~20 g)</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Fish sauce</td>
+                <td id="fish-sauce-amount">100 ml</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="recipe-notes">
+        <h2>Notes on Kimchi Making</h2>
+        <p>This calculator helps you scale ingredients based on the weight of your Chinese cabbage. The proportions are based on traditional Korean kimchi recipes.</p>
+        <p>Remember these key steps:</p>
+        <ul>
+            <li>Salt the cabbage and let it sit for 2-4 hours before rinsing</li>
+            <li>Make a rice flour paste with water and cool before adding to the seasoning mix</li>
+            <li>For vegetarian kimchi, replace fish sauce with soy sauce or salt</li>
+            <li>Ferment at room temperature for 1-2 days, then refrigerate</li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Reference ingredients ratios based on screenshot
+            // Original reference has 2000g cabbage, scaled values are for 3500g
+            const ingredientRatios = {
+                cabbage: { base: 2000, scaled: 3500, unit: 'g' },
+                onion: { base: 1, scaled: 1.75, unit: 'pieces' },
+                carrot: { base: 200, scaled: 350, unit: 'g' },
+                greenOnion: { base: 80, scaled: 140, unit: 'g' },
+                daikon: { base: 200, scaled: 350, unit: 'g' },
+                garlic: { base: 2, scaled: 3.5, unit: 'heads' },
+                ginger: { baseMin: 20, baseMax: 30, scaledMin: 35, scaledMax: 50, unit: 'g' },
+                pepperFlakes: { baseMin: 90, baseMax: 180, scaledMin: 160, scaledMax: 300, unit: 'g' },
+                sugar: { base: 36, scaled: 63, unit: 'g' },
+                riceFlour: { base: 20, scaled: 35, unit: 'g' },
+                fishSauce: { base: 100, scaled: 175, unit: 'ml' }
+            };
+
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const cabbageWeightInput = document.getElementById('cabbage-weight');
+
+            // Function to calculate ingredients based on cabbage weight
+            function calculateIngredients() {
+                const cabbageWeight = parseFloat(cabbageWeightInput.value) || 2000;
+                const ratio = cabbageWeight / ingredientRatios.cabbage.base;
+                
+                // Update the table with calculated values
+                document.getElementById('cabbage-amount').textContent = `${cabbageWeight} g`;
+                
+                // Onion (handle fractional pieces)
+                const onionAmount = ingredientRatios.onion.base * ratio;
+                let onionText;
+                if (onionAmount < 1.2) {
+                    onionText = "1 piece";
+                } else if (onionAmount < 2) {
+                    onionText = "1.5-2 pieces";
+                } else {
+                    onionText = `${Math.round(onionAmount * 10) / 10} pieces`;
+                }
+                document.getElementById('onion-amount').textContent = onionText;
+                
+                // Carrot
+                document.getElementById('carrot-amount').textContent = `${Math.round(ingredientRatios.carrot.base * ratio)} g`;
+                
+                // Green onion
+                document.getElementById('green-onion-amount').textContent = `${Math.round(ingredientRatios.greenOnion.base * ratio)} g`;
+                
+                // Daikon
+                document.getElementById('daikon-amount').textContent = `${Math.round(ingredientRatios.daikon.base * ratio)} g`;
+                
+                // Garlic (handle as decimal for small amounts, whole number for larger)
+                const garlicAmount = ingredientRatios.garlic.base * ratio;
+                let garlicText;
+                if (garlicAmount < 1) {
+                    garlicText = `${Math.round(garlicAmount * 10) / 10} head`;
+                } else {
+                    garlicText = `${Math.round(garlicAmount * 10) / 10} heads`;
+                }
+                document.getElementById('garlic-amount').textContent = garlicText;
+                
+                // Update garlic cloves note
+                const approxCloves = Math.round(garlicAmount * 12); // Approx 12 cloves per head
+                document.getElementById('garlic-notes').textContent = `Approximately ${approxCloves} cloves`;
+                
+                // Ginger (range)
+                const gingerMin = Math.round(ingredientRatios.ginger.baseMin * ratio);
+                const gingerMax = Math.round(ingredientRatios.ginger.baseMax * ratio);
+                document.getElementById('ginger-amount').textContent = `${gingerMin}-${gingerMax} g`;
+                
+                // Pepper flakes (range)
+                const pepperMin = Math.round(ingredientRatios.pepperFlakes.baseMin * ratio);
+                const pepperMax = Math.round(ingredientRatios.pepperFlakes.baseMax * ratio);
+                document.getElementById('pepper-amount').textContent = `${pepperMin}-${pepperMax} g`;
+                
+                // Sugar - calculate in grams but display in tbsp if small amount
+                const sugarGrams = Math.round(ingredientRatios.sugar.base * ratio);
+                let sugarText;
+                if (sugarGrams <= 50) {
+                    const tbsp = Math.round(sugarGrams / 12); // ~12g per tbsp
+                    sugarText = `${tbsp} tbsp (~${sugarGrams} g)`;
+                } else {
+                    sugarText = `${sugarGrams} g`;
+                }
+                document.getElementById('sugar-amount').textContent = sugarText;
+                
+                // Rice flour
+                const riceFlourGrams = Math.round(ingredientRatios.riceFlour.base * ratio);
+                let riceFlourText;
+                if (riceFlourGrams <= 40) {
+                    const tbsp = Math.round(riceFlourGrams / 10); // ~10g per tbsp
+                    riceFlourText = `${tbsp} tbsp (~${riceFlourGrams} g)`;
+                } else {
+                    riceFlourText = `${riceFlourGrams} g`;
+                }
+                document.getElementById('rice-flour-amount').textContent = riceFlourText;
+                
+                // Fish sauce
+                document.getElementById('fish-sauce-amount').textContent = `${Math.round(ingredientRatios.fishSauce.base * ratio)} ml`;
+                
+                // Highlight the table to show it's been updated
+                const table = document.getElementById('ingredients-table');
+                table.classList.add('highlight');
+                setTimeout(() => {
+                    table.classList.remove('highlight');
+                }, 500);
+            }
+
+            // Reset to default values
+            function resetCalculator() {
+                cabbageWeightInput.value = 2000;
+                calculateIngredients();
+            }
+            
+            // Event listeners
+            calculateBtn.addEventListener('click', calculateIngredients);
+            resetBtn.addEventListener('click', resetCalculator);
+            
+            // Initialize with default values
+            calculateIngredients();
+        });
+    </script>
+</body>
+</html>
